@@ -136,59 +136,56 @@ function update ()
         return;
     }
 
+    
+    if (cursors.up.isDown)
+    {
+        this.physics.velocityFromRotation(player.rotation, player.body.maxSpeed, player.body.acceleration);
+    }
+    else
+    {
+        player.setAccelerationX(0);
+        player.setAccelerationY(0);
+    }
+    
+    
+    if (player.body.acceleration.x >= 0)
+    {
+        player.setAccelerationX(-300);
+    }
+    
+    else if (player.body.acceleration.y >= 0)
+    {
+        player.setAccelerationY(-300);
+    }
+    
+    else if (player.body.acceleration.x <= 0)
+    {
+        player.setAccelerationX(300);
+    }
+    
+    else if (player.body.acceleration.y <= 0)
+    {
+        player.setAccelerationY(300);
+    }
+    
+
     if (cursors.left.isDown)
     {
-        player.setVelocityX(-160);
-
-        player.anims.play('left', true);
+        player.setAngularVelocity(-100);
     }
     else if (cursors.right.isDown)
     {
-        player.setVelocityX(160);
-
-        player.anims.play('right', true);
+        player.setAngularVelocity(100);
     }
     else
     {
-        player.setVelocityX(0);
+        player.setAngularVelocity(0);
+    }
+    
+    
+    
 
-        player.anims.play('turn');
-    }
-
-    if (cursors.up.isDown)
-    {
-        player.setVelocityY(-160);
-    }
     
-    else if (cursors.down.isDown)
-    {
-        player.setVelocityY(160);
-    }
-    
-    else
-    {
-        player.setVelocityY(0);
-    }
-    
-    if (touches.w.isDown && cursors.left.isDown)
-    {
-        player.setVelocityX(-250);
-    }
-    
-    else if (touches.w.isDown && cursors.right.isDown)
-    {
-        player.setVelocityX(250);
-    }
-    
-    else if (touches.w.isDown && cursors.up.isDown)
-    {
-        player.setVelocityY(-250);
-    }
-             
-    else if (touches.w.isDown && cursors.down.isDown)
-    {
-        player.setVelocityY(250);
-    }
 }
 
 function collectStar (player, star)
